@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from show_url.mail.views import index
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^.*', 'show_url.mail.views.index', name='index'),
+    url(r'^.*', index, name='index'),
 ]

@@ -17,4 +17,8 @@ def index(request):
         return HttpResponse(scheme + '://' + host + cici)
 
     else:
-        pass
+        cici = request.POST
+        post_dict = {}
+        for (k, v) in cici.items():
+            post_dict[k] = v
+        return HttpResponse('{}\nPOST\n{}\n'.format(request.scheme + '://' + request.get_host() + request.path, post_dict))
