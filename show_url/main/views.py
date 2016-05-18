@@ -14,7 +14,14 @@ def index(request):
         cici = request.path
         host = request.get_host()
         scheme = request.scheme
-        return HttpResponse(scheme + '://' + host + cici)
+        url_patterns = []
+        for k, v in request.GET.items():
+            url_patterns.append('{}={}'.format(k, v))
+        if url_patterns:
+            all_patterns = '?' + '&'.join(url_patterns)
+            return HttpResponse(scheme + '://' + host + cici + all_patterns)
+        else:
+            return HttpResponse(scheme + '://' + host + cici)
 
     else:
         cici = request.POST
